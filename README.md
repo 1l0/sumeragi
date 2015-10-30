@@ -1,2 +1,1 @@
-# sumeragi
-Japanese calendar(皇暦, 皇紀, 元号) in Go
+# sumeragi [![GoDoc](https://godoc.org/github.com/1l0/sumeragi?status.svg)](https://godoc.org/github.com/1l0/sumeragi)
