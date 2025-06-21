@@ -7,8 +7,9 @@ import (
 )
 
 func TestNow(t *testing.T) {
-	now := Now()
-	zone, _ := now.Zone()
+	now := time.Now()
+	sumeragiNow := To(now)
+	zone, _ := sumeragiNow.Zone()
 	if zone != "SUMERAGI" {
 		t.Error("TIme zone must be SUMERAGI")
 	}
@@ -16,17 +17,17 @@ func TestNow(t *testing.T) {
 
 func TestEra(t *testing.T) {
 	m := time.Date(512, time.January, 1, 0, 0, 0, 0, time.UTC)
-	e := ToEra(m)
+	e := EraFromTime(m)
 	if e.Kanji != "" {
 		t.Error("era must be unnamed")
 	}
 	m = time.Date(1597, time.January, 1, 0, 0, 0, 0, time.UTC)
-	e = ToEra(m)
+	e = EraFromTime(m)
 	if e.Kanji != "慶長" {
 		t.Error("invalid era")
 	}
 	m = time.Date(2025, time.January, 1, 0, 0, 0, 0, time.UTC)
-	e = ToEra(m)
+	e = EraFromTime(m)
 	if e.Kanji != "令和" {
 		t.Error("invalid era")
 	}
@@ -46,7 +47,10 @@ func TestEraFromName(t *testing.T) {
 }
 
 func Example() {
-	now := Now()
-	e := ToEra(now)
-	fmt.Printf("Now: (Sumeragi) %v, Era: %v\n", now, e)
+	d := time.Date(1704, time.May, 1, 0, 0, 0, 0, time.UTC)
+	e := EraFromTime(d)
+	sumeragiDate := To(e.Epoch)
+	fmt.Printf("%s %s %s\n", e.Kanji, e.Emperors[0], sumeragiDate)
+
+	// Output: 宝永 中御門天皇 2364-04-16 00:00:00 +0900 SUMERAGI
 }

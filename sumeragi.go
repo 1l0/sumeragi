@@ -19,11 +19,6 @@ type Era struct {
 	Emperors []string
 }
 
-// Now in Japanese calendar.
-func Now() time.Time {
-	return time.Now().In(SUMERAGI).AddDate(660, 0, 0)
-}
-
 // To time in Japanese calendar.
 func To(t time.Time) time.Time {
 	if z, _ := t.Zone(); z == "SUMERAGI" {
@@ -32,8 +27,8 @@ func To(t time.Time) time.Time {
 	return t.In(SUMERAGI).AddDate(660, 0, 0)
 }
 
-// ToEra returns an era of the time.
-func ToEra(t time.Time) Era {
+// EraFromTime returns an era of the time.
+func EraFromTime(t time.Time) Era {
 	for i, era := range eras {
 		if i == 0 {
 			continue
