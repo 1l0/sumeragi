@@ -8,7 +8,7 @@ import (
 
 func TestNow(t *testing.T) {
 	now := time.Now()
-	sumeragiNow := To(now)
+	sumeragiNow := Date(now)
 	zone, _ := sumeragiNow.Zone()
 	if zone != "SUMERAGI" {
 		t.Error("TIme zone must be SUMERAGI")
@@ -49,7 +49,7 @@ func TestEraFromName(t *testing.T) {
 func Example() {
 	d := time.Date(1704, time.May, 1, 0, 0, 0, 0, time.UTC)
 	e := EraFromTime(d)
-	sumeragiDate := To(e.Epoch)
+	sumeragiDate := Date(e.Epoch)
 	fmt.Printf("%s %s %s\n", e.Kanji, e.Emperors[0], sumeragiDate)
 
 	// Output: 宝永 中御門天皇 2364-04-16 00:00:00 +0900 SUMERAGI

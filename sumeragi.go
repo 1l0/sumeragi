@@ -19,8 +19,8 @@ type Era struct {
 	Emperors []string
 }
 
-// To time in Japanese calendar.
-func To(t time.Time) time.Time {
+// Date converts date in Japanese calendar.
+func Date(t time.Time) time.Time {
 	if z, _ := t.Zone(); z == "SUMERAGI" {
 		return t
 	}
@@ -28,18 +28,19 @@ func To(t time.Time) time.Time {
 }
 
 // EraFromTime returns an era of the time.
-func EraFromTime(t time.Time) Era {
+func EraFromTime(t time.Time) *Era {
 	for i, era := range eras {
 		if i == 0 {
 			continue
 		}
 		if era.Epoch.After(t) {
-			return eras[i-1]
+			return &eras[i-1]
 		}
 	}
-	return eras[len(eras)-1]
+	return &eras[len(eras)-1]
 }
 
+// EraFromName returns an era from the name.
 func EraFromName(name string) *Era {
 	for i, era := range eras {
 		if i == 0 {
